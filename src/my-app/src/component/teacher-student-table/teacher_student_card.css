@@ -1,0 +1,9 @@
+
+.teacher-student-card {
+    border-radius: 15px;
+    border-width: 10px;
+    border-color: #4A6FA5;
+    background-color: #cccccc;
+    padding: 20px;
+    margin-top: 20px;
+}

@@ -1,0 +1,51 @@
+.auth-form {
+    padding: 7px;
+    border-radius: 15px;
+    border-style: inset;
+    border-color: blue;
+    display: block;
+    flex-wrap: wrap;
+}
+
+.auth-form-component {
+    margin: 4px;
+    display: block;
+    gap: 5px;
+}
+
+.auth-component {
+    margin-bottom: 20px;
+}
+
+.auth-input,
+.auth-select,
+.auth-checkbox {
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 5px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.auth-button {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #0056b3;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.abstract-table-container {
+    margin-top: 100px;
+    padding: 20px;
+    padding-left: 20%; /* Отступ слева */
+    padding-right: 20%; /* Отступ справа */
+}

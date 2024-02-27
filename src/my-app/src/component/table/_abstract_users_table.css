@@ -1,0 +1,70 @@
+.abstract-table {
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+
+.abstract-table-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.abstract-table-data {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.add-student-button {
+    position: absolute;
+    top: 110px; /* Регулируйте положение по своему усмотрению */
+    right: 16%;
+    padding: 10px 15px;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4A6FA5;
+    color: white;
+    cursor: pointer;
+}
+
+.status-circle {
+    width: 20px; /* Увеличение размера кружка */
+    height: 20px; /* Увеличение размера кружка */
+    border-radius: 50%; /* Делает кружок круглым */
+    display: inline-block;
+    margin: 0 auto; /* Отцентрирование кружка */
+    border: 3px solid transparent; /* Добавление границы к кружку */
+}
+.abstract-table-container {
+    margin-top: 100px;
+    padding: 20px;
+    padding-left: 15%; /* Отступ слева */
+    padding-right: 15%; /* Отступ справа */
+}
+
+.search-box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    background-color: #4A6FA5;
+    color: white;
+}

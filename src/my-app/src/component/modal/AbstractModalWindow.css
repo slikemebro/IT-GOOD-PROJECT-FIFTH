@@ -1,0 +1,49 @@
+/* Стили для модального окна */
+.abstract-modal-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 600px;
+}
+
+/* Стили для заголовка модального окна */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+/* Стили для кнопки закрытия */
+.modal-header button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+/* Стили для тела модального окна */
+.modal-body {
+    text-align: left;
+}
+
+/* Дополнительные стили для фона, если нужно затемнение */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900; /* Меньше, чем у модального окна */
+}

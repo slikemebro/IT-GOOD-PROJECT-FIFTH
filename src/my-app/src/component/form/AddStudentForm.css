@@ -1,0 +1,96 @@
+
+.add-student-form {
+    padding: 7px;
+    border-radius: 15px;
+    border-style: inset;
+    border-color: blue;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.add-student-form-component {
+    margin: 4px;
+    display: flex;
+    gap: 5px;
+}
+
+.add-student-form-input {
+    border-style: hidden;
+    border-bottom-style: revert;
+}
+
+.add-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.form-component {
+    margin-bottom: 20px;
+}
+
+.form-component label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #333;
+}
+
+.form-input,
+.form-select,
+.form-checkbox {
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 5px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus,
+.form-select:focus {
+    border-color: #0056b3;
+}
+
+.form-checkbox {
+    width: auto;
+    margin-top: 0;
+}
+
+.form-button {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0056b3;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover,
+.form-button:focus {
+    background-color: #003d82;
+}
+
+.form-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Добавление небольшой анимации для checkbox */
+.form-checkbox {
+    cursor: pointer;
+}
+
+.form-checkbox:checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}

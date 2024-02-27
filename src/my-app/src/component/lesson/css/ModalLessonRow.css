@@ -1,0 +1,51 @@
+.modal-lesson-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: calc(100% - 91px); /* Уменьшение ширины на 20px */
+    margin: 4px auto; /* Центрирование строки */
+}
+
+.modal-lesson-row > div {
+    /* Удаляем flex: 1; для более точного контроля ширины элементов */
+    margin: 0 5px; /* Отступы между элементами */
+    text-align: center; /* Центрирование текста */
+}
+
+.modal-lesson-row > div:first-child,
+.modal-lesson-row > div:last-child {
+    flex: 0 0 auto; /* Элементы не растягиваются и не сжимаются */
+    text-align: left; /* Выравнивание текста для первого элемента слева */
+}
+
+.modal-lesson-row > div:last-child {
+    text-align: right; /* Выравнивание текста для последнего элемента справа */
+}
+
+
+.status-circle {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-pending {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: blue;
+    display: inline-block;
+}
+.status-completed {
+    color: green;
+    font-size: 1.2rem;
+}
+.status-canceled {
+    color: red;
+    font-size: 1.2rem;
+}

@@ -1,0 +1,21 @@
+.modal-lesson-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    line-height: normal;
+    background-color: #f2f2f2; /* Светло-серый цвет фона */
+    color: #333; /* Тёмно-серый текст */
+    border-radius: 15px;
+    font-size: 1.2rem; /* Больший размер шрифта */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Небольшая тень для объёмности */
+    border: 1px solid #ddd; /* Тонкая граница */
+    position: relative;
+}
+
+.bonus-amount {
+    position: absolute;
+    right: 10px; /* Позиционирование справа */
+    font-weight: bold;
+}

@@ -1,0 +1,8 @@
+.modal-lesson-content {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 100px;
+    padding: 20px 15%;
+    justify-content: center;
+    flex-direction: column;
+}
