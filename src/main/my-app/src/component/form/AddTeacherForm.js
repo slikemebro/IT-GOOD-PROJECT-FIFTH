@@ -2,6 +2,7 @@ import React from 'react'
 import './AddStudentForm.css';
 import PropTypes from "prop-types";
 import {Teacher} from "../../domain/Teacher";
+import CardNumberInput from "../custom-components/CardNumberInput";
 
 export class AddTeacherForm extends React.PureComponent {
 
@@ -69,8 +70,10 @@ export class AddTeacherForm extends React.PureComponent {
         this.setState({contacts: e.target.value});
     }
 
-    handleCardNumberInput(e) {
-        this.setState({cardNumber: e.target.value});
+    //todo why i need to use this function?
+    handleCardNumberInput = (cardNumber) => {
+        this.setState({cardNumber: cardNumber.replace(/\s/g, '')},
+            () => console.log(this.state.cardNumber));
     }
 
     handleCardNameInput(e) {
@@ -119,8 +122,9 @@ export class AddTeacherForm extends React.PureComponent {
                 <input value={this.state.cardName} onChange={(e) => this.handleCardNameInput(e)} className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
-                <label>Card Number:</label>
-                <input value={this.state.cardNumber} onChange={(e) => this.handleCardNumberInput(e)} className="add-student-form-input"/>
+                {/*<label>Card Number:</label>*/}
+                {/*<input value={this.state.cardNumber} onChange={(e) => this.handleCardNumberInput(e)} className="add-student-form-input"/>*/}
+                <CardNumberInput onCardNumberChange={this.handleCardNumberInput}/>
             </div>
             <div className="add-student-form-component">
                 <label>Joined:</label>
