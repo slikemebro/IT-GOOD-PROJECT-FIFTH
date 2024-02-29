@@ -1,5 +1,5 @@
 import {images, useCreditCardValidator} from 'react-creditcard-validator';
-// import "./cardNumberStyle.css";
+import "./cardNumberStyle.css";
 
 const CardNumberInput = ({onCardNumberChange}) => {
     const {

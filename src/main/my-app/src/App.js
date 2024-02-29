@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import HoverNavbar from "./component/navbar/HoverNavbar";
 import {useEffect, useState} from "react";
@@ -11,7 +10,6 @@ import {SalaryPage} from "./page/SalaryPage";
 import {AuthPage} from "./page/AuthPage";
 import {SwitchToTeacherPage} from "./page/SwitchToTeacherPage";
 import {currentUser, verifyToken} from "./request/auth";
-import {wait} from "@testing-library/user-event/dist/utils";
 
 
 function App() {
@@ -31,8 +29,8 @@ function App() {
                 console.log("verified");
                 getCurrentUser();
             }).catch((error) => {
-                  console.log(error);
-                  setLog(false);
+                console.log(error);
+                setLog(false);
             });
         }
     }, []);
@@ -98,7 +96,8 @@ function App() {
                 activeTab === 'Payment' && <PaymentPage/> ||
                 activeTab === 'Salary' && <SalaryPage/> ||
                 activeTab === 'Switch to teacher' && <SwitchToTeacherPage/> ||
-                activeTab === "Auth" && <AuthPage onLogin={() => onLogin()} onLogout={() => onLogout()} logged={logged}/>
+                activeTab === "Auth" &&
+                <AuthPage onLogin={() => onLogin()} onLogout={() => onLogout()} logged={logged}/>
             }
             {
                 showLessons && <ModalLessonContent tableId={tableId} userRole={userRole} teacherId={teacherId}/>

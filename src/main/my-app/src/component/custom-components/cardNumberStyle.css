@@ -9,11 +9,11 @@
 
 
 /* Input styles */
-input {
-    padding: 1em;
-    margin: 0.5em 0;
-    display: block;
-}
+/*input {*/
+/*    padding: 1em;*/
+/*    margin: 0.5em 0;*/
+/*    display: block;*/
+/*}*/
 
 /* Input group styles */
 .input-group {
@@ -27,25 +27,25 @@ input {
     border: 1px solid gray;
 }
 
-.input-group label {
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 14px;
-}
+/*.input-group label {*/
+/*    text-transform: uppercase;*/
+/*    font-weight: 400;*/
+/*    font-size: 14px;*/
+/*}*/
 
 .input-group svg {
     position: absolute;
-    left: 132%;
+    left: 135%;
     /*left: 151.733px;*/
-    bottom: 36%;
+    bottom: 7%;
     /*bottom: 20.78px;*/
 }
 
-/* Multi-input styles */
-.multi-input {
-    /*margin-top: 20px;*/
-    width: 60%;
-    display: flex;
-    gap: 10px;
-}
+/*!* Multi-input styles *!*/
+/*.multi-input {*/
+/*    !*margin-top: 20px;*!*/
+/*    width: 60%;*/
+/*    display: flex;*/
+/*    gap: 10px;*/
+/*}*/
 

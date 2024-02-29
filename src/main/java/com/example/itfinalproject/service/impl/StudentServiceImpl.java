@@ -94,7 +94,7 @@ public class StudentServiceImpl implements BaseEmployeeService<Student> {
     }
 
     public boolean isCurrentUserIsTeacherOfStudent(Long studentId){
-        User user = (User) AuthUtil.getCurrentUser();
+        User user = AuthUtil.getCurrentUser();
         List<Table> tableList = tableRepository.findByStudentId(studentId);
 
         for (Table table : tableList) {

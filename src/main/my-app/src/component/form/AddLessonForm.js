@@ -1,6 +1,7 @@
 import React from 'react'
 import './AddStudentForm.css';
 import PropTypes from "prop-types";
+import CustomTimePicker from "../custom-components/CustomTimePicker";
 
 export class AddLessonForm extends React.PureComponent {
 
@@ -21,7 +22,7 @@ export class AddLessonForm extends React.PureComponent {
         endDateTime: null,
         status: 1,
         link: "",
-        mode: 1,
+        mode: 2,
         repeatWeeks: 1,
         weekdays: {
             monday: false,
@@ -43,18 +44,32 @@ export class AddLessonForm extends React.PureComponent {
     }
 
 
-    handleStartDateInput(e) {
-        const utcDate = this.getUtc(e);
-        this.setState({startDateTime: utcDate});
+    handleStartDateInput = (e) => {
+        const currentDate = new Date();
+        currentDate.setHours(e.split(":")[0]);
+        currentDate.setMinutes(e.split(":")[1]);
+
+        const utcDate = this.getUtc(currentDate);
+
+        this.setState({startDateTime: utcDate}, () => {
+            console.log(this.state.startDateTime);
+        });
     }
 
-    handleEndDateInput(e) {
-        const utcDate = this.getUtc(e);
-        this.setState({endDateTime: utcDate});
+    handleEndDateInput = (e) => {
+        const currentDate = new Date();
+        currentDate.setHours(e.split(":")[0]);
+        currentDate.setMinutes(e.split(":")[1]);
+
+        const utcDate = this.getUtc(currentDate);
+
+        this.setState({endDateTime: utcDate}, () => {
+            console.log(this.state.endDateTime);
+        });
     }
 
-    getUtc(e) {
-        const localDate = new Date(e.target.value);
+    getUtc = (localDate) => {
+        console.log(localDate);
         const utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate(), localDate.getHours(), localDate.getMinutes()));
         return utcDate.toISOString();
     }
@@ -94,7 +109,7 @@ export class AddLessonForm extends React.PureComponent {
             weekdays
         } = this.state;
 
-        if (mode == 1) {
+        if (mode === 1) {
 
             for (let i = 0; i < numberOfLessons; i++) {
                 const start = new Date(startDateTime);
@@ -112,7 +127,7 @@ export class AddLessonForm extends React.PureComponent {
                 };
                 this.props.addRow(DATA);
             }
-        } else if (mode == 2) {
+        } else if (mode === 2) {
             const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
             const selectedDays = days.filter(day => weekdays[day]);
 
@@ -161,19 +176,11 @@ export class AddLessonForm extends React.PureComponent {
             </div>
             <div className="add-student-form-component">
                 <label>Start:</label>
-                <input
-                    type="datetime-local"
-                    value={this.state.startDateTime ? new Date(this.state.startDateTime).toISOString().slice(0, 16) : ""}
-                    onChange={(e) => this.handleStartDateInput(e)}
-                    className="add-student-form-input"/>
+                <CustomTimePicker handleTime={this.handleStartDateInput} valueOfTime={"10:00"}/>
             </div>
             <div className="add-student-form-component">
                 <label>End:</label>
-                <input
-                    type="datetime-local"
-                    value={this.state.endDateTime ? new Date(this.state.endDateTime).toISOString().slice(0, 16) : ""}
-                    onChange={(e) => this.handleEndDateInput(e)}
-                    className="add-student-form-input"/>
+                <CustomTimePicker handleTime={this.handleEndDateInput} valueOfTime={"11:00"}/>
             </div>
             <div className="add-student-form-component">
                 <label>Status:</label>
@@ -182,12 +189,13 @@ export class AddLessonForm extends React.PureComponent {
             </div>
             <div className="add-student-form-component">
                 <label>Mode:</label>
-                <select value={this.state.mode} onChange={(e) => this.handleModeChange(e)} className="add-student-form-input">
+                <select value={this.state.mode} onChange={(e) => this.handleModeChange(e)}
+                        className="add-student-form-input">
                     <option value={1}>Interval and Count</option>
                     <option value={2}>Weekdays</option>
                 </select>
             </div>
-            {this.state.mode == 2 && (
+            {this.state.mode === 2 && (
                 <>
                     <div className="add-student-form-component">
                         <label>Repeat for Weeks:</label>

@@ -1,5 +1,6 @@
 package com.example.itfinalproject.util;
 
+import com.example.itfinalproject.domain.User;
 import com.example.itfinalproject.exception.UserAreNotAuthorizedException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,10 +12,10 @@ public final class AuthUtil {
     private AuthUtil() {
     }
 
-    public static UserDetails getCurrentUser() {
+    public static User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            return (UserDetails) authentication.getPrincipal();
+            return (User) authentication.getPrincipal();
         }
         throw new UserAreNotAuthorizedException("User are not authorized");
     }

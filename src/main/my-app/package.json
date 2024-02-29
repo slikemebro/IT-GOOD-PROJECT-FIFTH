@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@react-input/mask": "^1.0.21",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -16,6 +17,7 @@
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.22.0",
     "react-scripts": "^5.0.1",
+    "react-time-picker": "^6.6.0",
     "styled-components": "^6.1.8",
     "superagent": "^8.1.2",
     "web-vitals": "^2.1.4"

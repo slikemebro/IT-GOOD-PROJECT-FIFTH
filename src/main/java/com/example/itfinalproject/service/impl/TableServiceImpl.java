@@ -87,7 +87,7 @@ public class TableServiceImpl implements TableService {
     }
 
     public boolean isCurrentUserIsOwnerOfTable(Long teacherID) {
-        User user = (User) AuthUtil.getCurrentUser();
+        User user = AuthUtil.getCurrentUser();
         List<Table> tableList = repository.findByTeacherId(teacherID);
 
         for (Table table : tableList) {

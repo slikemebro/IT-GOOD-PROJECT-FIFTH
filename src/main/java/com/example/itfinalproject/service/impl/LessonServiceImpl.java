@@ -77,7 +77,7 @@ public class LessonServiceImpl implements LessonService {
 
 
     public boolean isCurrentUserIsOwnerOfLesson(Long teacherId) {
-        User user = (User) AuthUtil.getCurrentUser();
+        User user = AuthUtil.getCurrentUser();
 
         return Objects.equals(user.getTeacherId(), teacherId);
     }
