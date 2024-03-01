@@ -2,17 +2,21 @@ import React from 'react'
 import './AddStudentForm.css';
 import PropTypes from "prop-types";
 import {Teacher} from "../../domain/Teacher";
+import CardNumberInput from "../custom-components/CardNumberInput";
 
 export class AddTeacherForm extends React.PureComponent {
 
     static propTypes = {
         teacher: PropTypes.instanceOf(Teacher),
-        addRow: PropTypes.func
+        addRow: PropTypes.func,
+        updateTeacher: PropTypes.func,
+        isUpdate: PropTypes.bool
     }
 
     static defaultProps = {
         teacher: null,
-        addRow: () => {}
+        addRow: () => {
+        }
     }
 
     constructor(props) {
@@ -69,8 +73,9 @@ export class AddTeacherForm extends React.PureComponent {
         this.setState({contacts: e.target.value});
     }
 
-    handleCardNumberInput(e) {
-        this.setState({cardNumber: e.target.value});
+    handleCardNumberInput = (cardNumber) => {
+        this.setState({cardNumber: cardNumber.replace(/\s/g, '')},
+            () => console.log(this.state.cardNumber));
     }
 
     handleCardNameInput(e) {
@@ -90,37 +95,54 @@ export class AddTeacherForm extends React.PureComponent {
 
     onSubmit(e) {
         e.preventDefault();
-        const { name, surname, age, contacts, active, cardName, cardNumber, joined, id } = this.state;
-        const DATA = { id, name, surname, age, contacts, active, cardName, cardNumber, joined: new Date(joined).toISOString() };
-
-        this.props.addRow(new Teacher(DATA).requestObject);
+        const {name, surname, age, contacts, active, cardName, cardNumber, joined, id} = this.state;
+        const DATA = {
+            id,
+            name,
+            surname,
+            age,
+            contacts,
+            active,
+            cardName,
+            cardNumber,
+            joined: new Date(joined).toISOString()
+        };
+        if (this.props.isUpdate) {
+            this.props.updateTeacher(new Teacher(DATA).requestObject);
+        } else {
+            this.props.addRow(new Teacher(DATA).requestObject);
+        }
     }
 
     render() {
         return <div className="add-student-form">
             <div className="add-student-form-component">
                 <label>Name:</label>
-                <input value={this.state.name} onChange={(e) => this.handleNameInput(e)} className="add-student-form-input" />
+                <input value={this.state.name} onChange={(e) => this.handleNameInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Surname:</label>
-                <input value={this.state.surname} onChange={(e) => this.handleSurnameInput(e)} className="add-student-form-input"/>
+                <input value={this.state.surname} onChange={(e) => this.handleSurnameInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Age:</label>
-                <input value={this.state.age} onChange={(e) => this.handleAgeInput(e)} className="add-student-form-input"/>
+                <input value={this.state.age} onChange={(e) => this.handleAgeInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Contacts:</label>
-                <input value={this.state.contacts} onChange={(e) => this.handleContactsInput(e)} className="add-student-form-input"/>
+                <input value={this.state.contacts} onChange={(e) => this.handleContactsInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Card Name:</label>
-                <input value={this.state.cardName} onChange={(e) => this.handleCardNameInput(e)} className="add-student-form-input"/>
+                <input value={this.state.cardName} onChange={(e) => this.handleCardNameInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
-                <label>Card Number:</label>
-                <input value={this.state.cardNumber} onChange={(e) => this.handleCardNumberInput(e)} className="add-student-form-input"/>
+                <CardNumberInput onCardNumberChange={this.handleCardNumberInput}/>
             </div>
             <div className="add-student-form-component">
                 <label>Joined:</label>
@@ -135,7 +157,9 @@ export class AddTeacherForm extends React.PureComponent {
                 <input type="checkbox" onChange={(e) => this.handleCheckedBox(e)}/>
             </div>
             <div className="add-student-form-component">
-                <button disabled={!this.isDataValid()} onClick={(e) => this.onSubmit(e)} className="add-student-form-button">Submit</button>
+                <button disabled={!this.isDataValid()} onClick={(e) => this.onSubmit(e)}
+                        className="add-student-form-button">Submit
+                </button>
             </div>
         </div>
     }

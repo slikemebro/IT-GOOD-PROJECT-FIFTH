@@ -101,7 +101,7 @@ public class TeacherServiceImpl implements BaseEmployeeService<Teacher> {
     }
 
     public boolean isCurrentUserIsTeacher(Long teacherId){
-        User user = (User) AuthUtil.getCurrentUser();
+        User user = AuthUtil.getCurrentUser();
         Teacher teacher = repository
                 .findById(teacherId)
                 .orElseThrow(() -> new TeacherNotFoundException("Teacher not found"));

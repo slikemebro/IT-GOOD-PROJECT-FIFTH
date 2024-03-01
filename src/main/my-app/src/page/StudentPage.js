@@ -16,25 +16,29 @@ export class StudentPage extends React.Component {
 
     loadStudents() {
         findAllStudents().then((data) => {
-            const students = data.body.map( (student) => new Student(student));
+            const students = data.body.map((student) => new Student(student));
             this.setState({students});
         })
     }
 
     addRow(data) {
-        saveOrUpdateStudent(data).then( () => {
+        saveOrUpdateStudent(data).then(() => {
             this.loadStudents();
         });
     }
 
     getColumns() {
         return [{
-            name: 'Surname',
-            accessor: "surname",
+            name: 'Name',
+            accessor: "name",
         },
             {
+                name: 'Surname',
+                accessor: "surname",
+            },
+            {
                 name: 'Contacts',
-                accessor:  'contacts'
+                accessor: 'contacts'
             },
             {
                 name: 'Amount',
@@ -57,7 +61,8 @@ export class StudentPage extends React.Component {
 
         return (
             <div>
-                <AbstractUsersTable data={this.state.students} manager={"student"} addRow={(data) => this.addRow(data)} columns={columns} studentPage={true}/>
+                <AbstractUsersTable data={this.state.students} manager={"student"} addRow={(data) => this.addRow(data)}
+                                    columns={columns} studentPage={true}/>
             </div>
         );
 

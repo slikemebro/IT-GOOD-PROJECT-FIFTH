@@ -18,7 +18,8 @@ export class AbstractUsersTable extends React.PureComponent {
         addRow: PropTypes.func,
         manager: PropTypes.string,
         switchToTeacher: PropTypes.func,
-        studentPage: PropTypes.bool
+        studentPage: PropTypes.bool,
+        updateTeacher: PropTypes.func
     }
 
     static defaultProps = {
@@ -31,7 +32,8 @@ export class AbstractUsersTable extends React.PureComponent {
 
     state = {
         searchTerm: '',
-        toEdit: null
+        toEdit: null,
+        isUpdate: false
     }
 
     handleSearch = (e) => {
@@ -42,7 +44,8 @@ export class AbstractUsersTable extends React.PureComponent {
         if (this.props.manager === "student") return <AddStudentForm addRow={(data) => this.props.addRow(data)}
                                                                      student={this.state.toEdit}/>
         if (this.props.manager === "teacher") return <AddTeacherForm addRow={(data) => this.props.addRow(data)}
-                                                                     teacher={this.state.toEdit}/>
+                                                                     teacher={this.state.toEdit} updateTeacher={this.props.updateTeacher}
+                                                                     isUpdate={this.state.isUpdate}/>
         if (this.props.manager === "payment") return <AddPaymentForm addRow={(data) => this.props.addRow(data)}/>
         if (this.props.manager === "salary") return <AddSalaryForm addRow={(data) => this.props.addRow(data)}/>
     }
@@ -57,10 +60,10 @@ export class AbstractUsersTable extends React.PureComponent {
 
     onEdit(row) {
         this.setState({toEdit: row});
+        this.setState({isUpdate: true});
     }
 
     renderRows() {
-        //todo: add teacher name and surname to salary
         const {searchTerm} = this.state;
         const filteredData = this.props.data.filter(student =>
             this.props.columns.some(column =>
@@ -68,15 +71,15 @@ export class AbstractUsersTable extends React.PureComponent {
             )
         );
         console.log(filteredData);
-        //todo
         if (this.props.studentPage) {
             filteredData.sort((a, b) => a.lessonsAmount - b.lessonsAmount);
         }
         return filteredData.map((student, index) => (
             <div key={index} className="abstract-table-row"
-                 //todo
-                 style={{backgroundColor: this.props.studentPage ?
-                         student.lessonsAmount > 5 ? student.lessonsAmount < 10 ? '#FF5733' : '#90ee90' : '#FFCCCB' : 'white'}}>
+                 style={{
+                     backgroundColor: this.props.studentPage ?
+                         student.lessonsAmount > 5 ? student.lessonsAmount < 10 ? '#FF5733' : '#90ee90' : '#FFCCCB' : 'white'
+                 }}>
                 {this.props.columns.map((column, colIndex) => (
                     <div key={colIndex} className="abstract-table-data">
                         {column.accessor === 'active' ? (
@@ -91,11 +94,15 @@ export class AbstractUsersTable extends React.PureComponent {
                                 <button onClick={() => this.onEdit(student)}>Edit</button>
                             </div>
                         ) : column.accessor === 'switch' ? (
-                                <div className="abstract-table-data">
-                                    <button onClick={() => this.props.switchToTeacher(student.id)}>Switch</button>
-                                </div>
-                            )
-                            :
+                            <div className="abstract-table-data">
+                                <button onClick={() => this.props.switchToTeacher(student.id)}>Switch</button>
+                            </div>
+                        ) : column.accessor === 'cardNumber' ? (
+                            <div className={"abstract-table-data"}>
+                                <label onClick={(e) => this.copyText(e)}
+                                       style={{ cursor: 'pointer', color: "blue"}}><u>{student[column.accessor]}</u></label>
+                            </div>
+                        ) :
                             (
                                 student[column.accessor]
                             )}
@@ -127,5 +134,13 @@ export class AbstractUsersTable extends React.PureComponent {
                 </div>
             </div>
         );
+    }
+
+    copyText(e) {
+        const textarea = e.target.textContent;
+        console.log(textarea);
+        navigator.clipboard.writeText(textarea).then(r => {
+            console.log("Copied");
+        });
     }
 }

@@ -19,7 +19,7 @@ export class ModalLessonRow extends React.PureComponent {
     }
 
     formatTime(date) {
-        return new Date(date).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+        return new Date(date).toJSON().slice(11, 16);
     }
 
     renderStatus(status) {
@@ -68,10 +68,6 @@ export class ModalLessonRow extends React.PureComponent {
             teacherId: this.props.teacherId,
             amount: 130
         };
-        // let salary = new Salary(DATA_FOR_SALARY);
-        // saveSalary(salary.requestObject).then(() => {
-        //     console.log("salary saved for teacher with id: " + this.props.teacherId);
-        // });
     }
 
     ifUserIsAdmin() {

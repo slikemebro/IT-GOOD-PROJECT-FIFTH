@@ -38,6 +38,13 @@ export class TeacherPage extends React.Component {
         });
     }
 
+    updateTeacher = (teacher) => {
+        saveOrUpdateTeacher(teacher).then((savedTeacher) => {
+            console.log("UpdateTeacher " + savedTeacher.body.id);
+            this.loadTeachers();
+        });
+    }
+
     generateUserJsonFile(user) {
         const content = `Email: ${user.email}\nPassword: ${user.password}`;
 
@@ -89,7 +96,7 @@ export class TeacherPage extends React.Component {
         return (
             <div>
                 <AbstractUsersTable data={this.state.teachers} columns={columns} manager={"teacher"}
-                                    addRow={(data) => this.addTeacher(data)}/>
+                                    addRow={(data) => this.addTeacher(data)} updateTeacher={this.updateTeacher}/>
             </div>
         );
 

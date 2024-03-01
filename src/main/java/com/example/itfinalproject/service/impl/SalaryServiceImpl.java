@@ -72,7 +72,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     public boolean isCurrentUserIsOwnerOfSalary(Long teacherID){
-        User user = (User) AuthUtil.getCurrentUser();
+        User user = AuthUtil.getCurrentUser();
         return user.getTeacherId().equals(teacherID);
     }
 }

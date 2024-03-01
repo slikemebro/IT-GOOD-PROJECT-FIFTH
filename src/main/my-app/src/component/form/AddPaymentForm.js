@@ -71,10 +71,6 @@ export class AddPaymentForm extends React.PureComponent {
 
     render() {
         return <div className="add-student-form">
-            {/*<div className="add-student-form-component">*/}
-            {/*    <label>Student ID:</label>*/}
-            {/*    <input value={this.state.studentId} onChange={(e) => this.handleStudentIdInput(e)} className="add-student-form-input" />*/}
-            {/*</div>*/}
             <div className="add-student-form-component">
                 <label>Student name:</label>
                 <input value={this.state.studentName} onChange={(e) => this.handleStudentName(e)}
@@ -85,7 +81,9 @@ export class AddPaymentForm extends React.PureComponent {
                 <select onChange={(e) => this.handleStudentIdInput(e)} className="add-student-form-input">
                     <option value={null}>Choose student</option>
                     {this.state.students.map(student => {
-                        return <option value={student.id}>{student.surname}</option>
+                        if (student.name.toLowerCase() === this.state.studentName.toLowerCase()) {
+                            return <option value={student.id}>{student.surname}</option>
+                        }
                     })}
                 </select>
             </div>
