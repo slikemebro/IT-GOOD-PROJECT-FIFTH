@@ -11,7 +11,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,32 +46,31 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> verifyToken(
             @RequestParam String token
     ) {
-        log.info("Verify token request: {}", token);
+        log.info("Verify token request");
         return ResponseEntity.ok(service.verify(token));
     }
 
     @GetMapping("/current-user")
     public ResponseEntity<UserDetails> getCurrentUser() {
         log.info("Get current user request");
-        log.info("Current user: {}", AuthUtil.getCurrentUser());
         return ResponseEntity.ok(AuthUtil.getCurrentUser());
     }
 
     @GetMapping("/user")
     public ResponseEntity<User> getUserAfterCreatingTeacher(@RequestParam Long teacherId) {
-        log.info("Get user request: {}", teacherId);
+        log.info("Get user after creating teacher. TeacherId: {}", teacherId);
         return ResponseEntity.ok(service.getUserByTeacherId(teacherId));
     }
 
     @GetMapping("/user/first-login")
     public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
-        log.info("Get user request: {}", email);
+        log.info("Get user by email: {}", email);
         return ResponseEntity.ok(service.getUserByEmail(email));
     }
 
     @PutMapping("/user/password")
     public ResponseEntity<User> updateUserPassword(@RequestParam String password, @RequestParam String email) {
-        log.info("Update user request: {}", email);
+        log.info("Update user password: {}; email: {}", password, email);
         return ResponseEntity.ok(service.updateUserPassword(email, password));
     }
 

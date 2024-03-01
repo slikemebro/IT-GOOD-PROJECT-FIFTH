@@ -12,5 +12,4 @@ public class TeacherSearchCriteria {
     private String name;
     private String surname;
 
-
 }

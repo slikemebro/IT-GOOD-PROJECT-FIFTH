@@ -4,7 +4,6 @@ import com.example.itfinalproject.domain.FirstLogin;
 import com.example.itfinalproject.domain.Role;
 import com.example.itfinalproject.domain.Teacher;
 import com.example.itfinalproject.domain.User;
-import com.example.itfinalproject.dto.RegisterRequest;
 import com.example.itfinalproject.dto.StudentDTO;
 import com.example.itfinalproject.exception.TeacherNotFoundException;
 import com.example.itfinalproject.repository.TeacherRepository;
@@ -30,14 +29,15 @@ public class TeacherServiceImpl implements BaseEmployeeService<Teacher> {
     private final AuthenticationServiceImpl authenticationService;
     private final FirstLoginService firstLoginService;
 
-
     @Override
     public List<Teacher> findAll() {
+        log.info("Find all teachers");
         return repository.findAll();
     }
 
     @Override
     public List<StudentDTO> findAllWithLessonsBalance() {
+        //todo not implemented
         return null;
     }
 
@@ -51,7 +51,7 @@ public class TeacherServiceImpl implements BaseEmployeeService<Teacher> {
             return createdTeacher;
         }
         createUser(createdTeacher);
-
+        log.info("Teacher created: {}", teacher.getId());
         return createdTeacher;
     }
 
@@ -82,29 +82,34 @@ public class TeacherServiceImpl implements BaseEmployeeService<Teacher> {
 
     @Override
     public List<Teacher> findActive() {
+        log.info("Find all active teachers");
         return repository.findByActiveTrue();
     }
 
     @Override
     public List<Teacher> findDisabled() {
+        log.info("Find all disabled teachers");
         return repository.findByActiveFalse();
     }
 
     @Override
     public Teacher findById(Long id) {
-        return repository.findById(id).orElse(null);
+        log.info("Find teacher by id: {}", id);
+        return repository.findById(id).orElseThrow(() -> new TeacherNotFoundException("Teacher not found"));
     }
 
     @Override
     public List<Teacher> findBySurname(String surname) {
+        log.info("Find teacher by surname: {}", surname);
         return repository.findBySurname(surname);
     }
 
-    public boolean isCurrentUserIsTeacher(Long teacherId){
+    public boolean isCurrentUserIsTeacher(Long teacherId) {
         User user = AuthUtil.getCurrentUser();
         Teacher teacher = repository
                 .findById(teacherId)
                 .orElseThrow(() -> new TeacherNotFoundException("Teacher not found"));
+        log.info("Check if current user is teacher: {}", teacherId);
         return Objects.equals(user.getTeacherId(), teacher.getId());
     }
 }

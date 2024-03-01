@@ -11,6 +11,7 @@ import com.example.itfinalproject.service.BaseEmployeeService;
 import com.example.itfinalproject.service.TableService;
 import com.example.itfinalproject.util.AuthUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Log4j2
 @RequiredArgsConstructor
 public class TableServiceImpl implements TableService {
 
@@ -27,16 +29,19 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public List<Table> findAll() {
+        log.info("Found all tables");
         return repository.findAll();
     }
 
     @Override
     public List<Table> findByStudentId(Long studentId) {
+        log.info("Found all tables by student id: {}", studentId);
         return repository.findByStudentId(studentId);
     }
 
     @Override
     public List<Table> findByTeacherId(Long teacherId) {
+        log.info("Found all tables by teacher id: {}", teacherId);
         return repository.findByTeacherId(teacherId);
     }
 
@@ -45,8 +50,14 @@ public class TableServiceImpl implements TableService {
         List<Table> tables = repository.findAll();
         List<TeacherStudentTableDTO> dtos = new ArrayList<>(tables.size());
 
+        getTableDtos(tables, dtos);
 
-        for (Table table: tables) {
+        log.info("Found all tables with names");
+        return dtos;
+    }
+
+    private void getTableDtos(List<Table> tables, List<TeacherStudentTableDTO> dtos) {
+        for (Table table : tables) {
             TeacherStudentTableDTO tStable = new TeacherStudentTableDTO();
             Teacher teacher = teacherService.findById(table.getTeacherId());
             Student student = studentService.findById(table.getStudentId());
@@ -62,12 +73,12 @@ public class TableServiceImpl implements TableService {
                 dtos.add(tStable);
             }
         }
-
-        return dtos;
+        log.info("Converted all tables to DTOs");
     }
 
     @Override
     public Table findById(Long id) {
+        log.info("Found table by id: {}", id);
         return repository.findById(id).orElse(null);
     }
 
@@ -75,21 +86,22 @@ public class TableServiceImpl implements TableService {
     public Table saveOrUpdate(Table table) {
         Table tableUpsert = table;
         if (tableUpsert.getId() != null) {
-            tableUpsert = repository.findById(table.getId()).get();
+            tableUpsert = repository.findById(table.getId())
+                    .orElseThrow(() -> new TableNotFoundException("Table not found"));
 
             tableUpsert.setActive(table.getActive());
             tableUpsert.setStudentId(table.getStudentId());
             tableUpsert.setTeacherId(table.getTeacherId());
             tableUpsert.setLessonIds(table.getLessonIds());
         }
-
+        log.info("Updated table: {}", tableUpsert);
         return repository.save(tableUpsert);
     }
 
     public boolean isCurrentUserIsOwnerOfTable(Long teacherID) {
         User user = AuthUtil.getCurrentUser();
         List<Table> tableList = repository.findByTeacherId(teacherID);
-
+        log.info("Checking if user is owner of table");
         for (Table table : tableList) {
             if (Objects.equals(user.getTeacherId(), table.getTeacherId())) {
                 return true;

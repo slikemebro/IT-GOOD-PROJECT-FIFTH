@@ -17,7 +17,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,7 +27,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
-public class User extends UserAuditableEntity implements UserDetails  {
+public class User extends UserAuditableEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,8 +38,6 @@ public class User extends UserAuditableEntity implements UserDetails  {
     @Column(unique = true)
     private String email;
 
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
-            message = "Password must contain at least 8 characters, including at least one letter and one number")
     private String password;
 
     private Long teacherId;

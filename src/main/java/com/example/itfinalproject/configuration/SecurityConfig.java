@@ -28,12 +28,12 @@ public class SecurityConfig {
         http.authorizeHttpRequests(requests ->
                 requests
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/auth/user/password").permitAll()
-                        .requestMatchers("api/v1/table/teacher").authenticated()
-                        .requestMatchers("/api/v1/lesson/teacher").authenticated()
-                        .requestMatchers("/api/v1/student/id").authenticated()
-                        .requestMatchers("/api/v1/teacher/{id}").authenticated()
-                        .requestMatchers("/api/v1/salary/teacher").permitAll()
+                        .requestMatchers(
+                                "api/v1/table/teacher",
+                                "/api/v1/lesson/teacher",
+                                "/api/v1/student/id",
+                                "/api/v1/teacher/{id}",
+                                "/api/v1/salary/teacher").authenticated()
                         .requestMatchers("/api/v1/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
         );

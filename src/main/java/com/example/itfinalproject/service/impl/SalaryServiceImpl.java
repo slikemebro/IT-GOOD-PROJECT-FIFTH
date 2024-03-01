@@ -29,15 +29,15 @@ public class SalaryServiceImpl implements SalaryService {
     @Override
     public List<SalaryDto> findByTeacherId(Long teacherId) {
         List<Salary> salaryList = repository.findByTeacherId(teacherId);
+        log.info("Salary list by teacher id: {}", teacherId);
         return getSalaryDtos(salaryList);
     }
-
 
     @Override
     public List<SalaryDto> findAll() {
         List<Salary> salaryList = repository.findAll();
+        log.info("All salary list");
         return getSalaryDtos(salaryList);
-
     }
 
     @Override
@@ -45,12 +45,17 @@ public class SalaryServiceImpl implements SalaryService {
     public SalaryDto save(SalaryDto salaryDto) {
         Teacher teacher = teacherRepository.findById(salaryDto.getTeacherId())
                 .orElseThrow(() -> new SalaryNotFoundException("Teacher not found"));
+        Salary salary = getSalary(salaryDto, teacher);
+        log.info("Salary saved: {}", salaryDto);
+        return getSalaryDto(repository.save(salary));
+    }
+
+    private Salary getSalary(SalaryDto salaryDto, Teacher teacher) {
         Salary salary = new Salary();
         salary.setAmount(salaryDto.getAmount());
         salary.setTeacher(teacher);
         salary.setDateTime(Instant.parse(salaryDto.getDateTime()));
-
-        return getSalaryDto(repository.save(salary));
+        return salary;
     }
 
     private List<SalaryDto> getSalaryDtos(List<Salary> salaryList) {
@@ -58,6 +63,7 @@ public class SalaryServiceImpl implements SalaryService {
         for (Salary salary : salaryList) {
             salaryDtoList.add(getSalaryDto(salary));
         }
+        log.info("Salary converted to DTOs: {}", salaryDtoList.size());
         return salaryDtoList;
     }
 
@@ -68,11 +74,14 @@ public class SalaryServiceImpl implements SalaryService {
         salaryDto.setTeacherId(saveSalary.getTeacher().getId());
         salaryDto.setTeacherName(saveSalary.getTeacher().getName());
         salaryDto.setTeacherSurname(saveSalary.getTeacher().getSurname());
+
+        log.info("Salary converted to DTO: {}", salaryDto);
         return salaryDto;
     }
 
-    public boolean isCurrentUserIsOwnerOfSalary(Long teacherID){
+    public boolean isCurrentUserIsOwnerOfSalary(Long teacherID) {
         User user = AuthUtil.getCurrentUser();
+        log.info("Checking if user is owner of salary: {}", teacherID);
         return user.getTeacherId().equals(teacherID);
     }
 }
