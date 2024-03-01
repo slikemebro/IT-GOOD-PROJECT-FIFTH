@@ -33,14 +33,16 @@ export class AddLessonForm extends React.PureComponent {
             saturday: false,
             sunday: false
         },
+        defaultStart: "10:00",
+        defaultEnd: "11:00"
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevState.startDateTime === null) {
-            this.handleStartDateInput("10:00");
+            this.handleStartDateInput(this.state.defaultStart);
         }
         if (prevState.endDateTime === null) {
-            this.handleEndDateInput("11:00");
+            this.handleEndDateInput(this.state.defaultEnd);
         }
     }
 
@@ -68,12 +70,18 @@ export class AddLessonForm extends React.PureComponent {
             console.log("start " + this.state.startDateTime);
         });
 
-        const endDate = new Date(utcDate);
-        endDate.setHours(endDate.getHours() + 1);
-        const utcEndDate = this.getUtc(endDate);
-        this.setState({endDateTime: utcEndDate}, () => {
-            console.log("end " + this.state.endDateTime);
-        });
+        //todo: add 1 hour to end date
+
+        // const endDate = new Date(utcDate);
+        // endDate.setHours(currentDate.getHours() + 1);
+        //
+        // this.setState({endDateTime: endDate.getHours() + 1 + ":00"}, () => {
+        //     console.log("end default" + this.state.endDateTime);
+        // });
+        // const utcEndDate = this.getUtc(endDate);
+        // this.setState({endDateTime: utcEndDate}, () => {
+        //     console.log("end " + this.state.endDateTime);
+        // });
     }
 
     handleEndDateInput = (e) => {
@@ -162,11 +170,11 @@ export class AddLessonForm extends React.PureComponent {
             </div>
             <div className="add-student-form-component">
                 <label>Start:</label>
-                <CustomTimePicker handleTime={this.handleStartDateInput} valueOfTime={"10:00"}/>
+                <CustomTimePicker handleTime={this.handleStartDateInput} valueOfTime={this.state.defaultStart}/>
             </div>
             <div className="add-student-form-component">
                 <label>End:</label>
-                <CustomTimePicker handleTime={this.handleEndDateInput} valueOfTime={"11:00"}/>
+                <CustomTimePicker handleTime={this.handleEndDateInput} valueOfTime={this.state.defaultEnd}/>
             </div>
             <div className="add-student-form-component">
                 <label>Status:</label>
