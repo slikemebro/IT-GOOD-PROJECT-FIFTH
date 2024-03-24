@@ -60,7 +60,7 @@ export class AddLessonForm extends React.PureComponent {
 
 
     handleStartDateInput = (e) => {
-        const currentDate = new Date();
+        const currentDate = this.state.startDateTime ? new Date(this.state.startDateTime) : new Date();
         currentDate.setHours(e.split(":")[0]);
         currentDate.setMinutes(e.split(":")[1]);
 
@@ -84,6 +84,21 @@ export class AddLessonForm extends React.PureComponent {
         // });
     }
 
+    //todo incorrect time always + 1
+    handleBeginFrom(e) {
+        const currentDate = this.state.startDateTime ? new Date(this.state.startDateTime) : new Date();
+        console.log("current date " + currentDate);
+        console.log("value" + e.target.value);
+        // currentDate.setFullYear(e.target.value.split("-")[0], e.target.value.split("-")[1], e.target.value.split("-")[2]);
+        currentDate.setMonth(e.target.value.split("-")[1]);
+        currentDate.setDate(e.target.value.split("-")[2]);
+        console.log("current date2 " + currentDate);
+        const utcDate = this.getUtc(currentDate);
+        this.setState({startDateTime: utcDate}, () => {
+            console.log("start " + this.state.startDateTime);
+        });
+    }
+
     handleEndDateInput = (e) => {
         const currentDate = new Date();
         currentDate.setHours(e.split(":")[0]);
@@ -92,7 +107,7 @@ export class AddLessonForm extends React.PureComponent {
         const utcDate = this.getUtc(currentDate);
 
         this.setState({endDateTime: utcDate}, () => {
-            console.log(this.state.endDateTime);
+            console.log("end " + this.state.endDateTime);
         });
     }
 
@@ -169,6 +184,14 @@ export class AddLessonForm extends React.PureComponent {
                        className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
+                <label>Begin from</label>
+                <input
+                    type="date"
+                    value={this.state.startDateTime ? new Date(this.state.startDateTime).toISOString().slice(0, 10) : ""}
+                    onChange={(e) => this.handleBeginFrom(e)}
+                    className="add-student-form-input"/>
+            </div>
+            <div className="add-student-form-component">
                 <label>Start:</label>
                 <CustomTimePicker handleTime={this.handleStartDateInput} valueOfTime={this.state.defaultStart}/>
             </div>
@@ -207,4 +230,6 @@ export class AddLessonForm extends React.PureComponent {
             </div>
         </div>
     }
+
+
 }

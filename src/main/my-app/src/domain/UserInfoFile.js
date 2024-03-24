@@ -1,6 +1,4 @@
-import data from "superagent/lib/request-base";
-
-export class UserInfoFile{
+export class UserInfoFile {
     _email = null;
     _password = null;
 

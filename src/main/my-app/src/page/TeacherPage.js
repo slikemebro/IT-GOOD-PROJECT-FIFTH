@@ -48,7 +48,7 @@ export class TeacherPage extends React.Component {
     generateUserJsonFile(user) {
         const content = `Email: ${user.email}\nPassword: ${user.password}`;
 
-        const blob = new Blob([content], { type: 'text/plain' });
+        const blob = new Blob([content], {type: 'text/plain'});
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;

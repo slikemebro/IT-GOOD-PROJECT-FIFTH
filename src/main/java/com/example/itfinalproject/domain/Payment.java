@@ -27,8 +27,6 @@ public class Payment {
 
     private Double amount;
 
-//    private Long studentId;
-
     private Integer lessonsAmount;
 
     private Instant paymentDateTime;

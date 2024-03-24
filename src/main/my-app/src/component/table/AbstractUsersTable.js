@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {Student} from "../../domain/Student";
 import "./_abstract_users_table.css";
 import {AddStudentForm} from "../form/AddStudentForm";
 import {AddTeacherForm} from "../form/AddTeacherForm";
@@ -44,7 +43,8 @@ export class AbstractUsersTable extends React.PureComponent {
         if (this.props.manager === "student") return <AddStudentForm addRow={(data) => this.props.addRow(data)}
                                                                      student={this.state.toEdit}/>
         if (this.props.manager === "teacher") return <AddTeacherForm addRow={(data) => this.props.addRow(data)}
-                                                                     teacher={this.state.toEdit} updateTeacher={this.props.updateTeacher}
+                                                                     teacher={this.state.toEdit}
+                                                                     updateTeacher={this.props.updateTeacher}
                                                                      isUpdate={this.state.isUpdate}/>
         if (this.props.manager === "payment") return <AddPaymentForm addRow={(data) => this.props.addRow(data)}/>
         if (this.props.manager === "salary") return <AddSalaryForm addRow={(data) => this.props.addRow(data)}/>
@@ -98,11 +98,14 @@ export class AbstractUsersTable extends React.PureComponent {
                                 <button onClick={() => this.props.switchToTeacher(student.id)}>Switch</button>
                             </div>
                         ) : column.accessor === 'cardNumber' ? (
-                            <div className={"abstract-table-data"}>
-                                <label onClick={(e) => this.copyText(e)}
-                                       style={{ cursor: 'pointer', color: "blue"}}><u>{student[column.accessor]}</u></label>
-                            </div>
-                        ) :
+                                <div className={"abstract-table-data"}>
+                                    <label onClick={(e) => this.copyText(e)}
+                                           style={{
+                                               cursor: 'pointer',
+                                               color: "blue"
+                                           }}><u>{student[column.accessor]}</u></label>
+                                </div>
+                            ) :
                             (
                                 student[column.accessor]
                             )}
@@ -139,7 +142,7 @@ export class AbstractUsersTable extends React.PureComponent {
     copyText(e) {
         const textarea = e.target.textContent;
         console.log(textarea);
-        navigator.clipboard.writeText(textarea).then(r => {
+        navigator.clipboard.writeText(textarea).then(() => {
             console.log("Copied");
         });
     }

@@ -16,7 +16,7 @@ export class PaymentPage extends React.Component {
     loadPayments() {
         findAllPayments().then((data) => {
             if (!!data.body) {
-                const payments = data.body.map( (model) => new Payment(model));
+                const payments = data.body.map((model) => new Payment(model));
                 this.setState({payments});
             }
         })
@@ -58,7 +58,8 @@ export class PaymentPage extends React.Component {
     render() {
         return (
             <div>
-                <AbstractUsersTable manager={"payment"} addRow={(data) => this.addRow(data)} data={this.state.payments} columns={this.getColumns()}/>
+                <AbstractUsersTable manager={"payment"} addRow={(data) => this.addRow(data)} data={this.state.payments}
+                                    columns={this.getColumns()}/>
             </div>
         )
     }

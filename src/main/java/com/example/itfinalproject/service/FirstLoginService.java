@@ -4,7 +4,6 @@ import com.example.itfinalproject.domain.FirstLogin;
 
 public interface FirstLoginService {
 
-
     FirstLogin save(FirstLogin firstLogin);
 
     FirstLogin findByUserId(Long userId);

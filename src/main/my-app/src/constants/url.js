@@ -4,7 +4,7 @@ export const URL_STUDENT = `${URL_API_PREFIX}/student`;
 export const URL_TEACHER = `${URL_API_PREFIX}/teacher`;
 export const URL_TABLE = `${URL_API_PREFIX}/table`;
 export const URL_LESSON = `${URL_API_PREFIX}/lesson`;
-export const URL_PAYMENT =`${URL_API_PREFIX}/payment`
+export const URL_PAYMENT = `${URL_API_PREFIX}/payment`
 export const URL_SALARY = `${URL_API_PREFIX}/salary`;
 
 export const URL_FIRST_LOGIN = `${URL_API_PREFIX}/first-login`;
@@ -27,8 +27,6 @@ export const URL_STUDENT_SURNAME = `${URL_STUDENT}/surname`;
 export const URL_STUDENT_ID = `${URL_STUDENT}/id`;
 
 export const URL_SALARY_TEACHER = `${URL_SALARY}/teacher`
-
-export const URL_REGISTRATION = `${URL_AUTH}/register`;
 
 export const URL_LOGIN = `${URL_AUTH}/authenticate`;
 

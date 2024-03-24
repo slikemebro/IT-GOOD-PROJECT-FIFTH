@@ -18,15 +18,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Log4j2
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
 
     @ExceptionHandler(TokenIsNotValidException.class)
     public ResponseEntity<?> handleTokenIsNotValidException(TokenIsNotValidException e) {
@@ -120,6 +119,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<?> handleStudentNotFoundException(StudentNotFoundException e) {
+        log.error(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException e) {
         log.error(e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }

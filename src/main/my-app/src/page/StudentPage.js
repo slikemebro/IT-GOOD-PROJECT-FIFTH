@@ -2,7 +2,6 @@ import React from 'react'
 import {findAllStudents, saveOrUpdateStudent} from "../request/student";
 import {Student} from "../domain/Student";
 import {AbstractUsersTable} from "../component/table/AbstractUsersTable";
-import {AddStudentForm} from "../component/form/AddStudentForm";
 
 export class StudentPage extends React.Component {
 
@@ -67,6 +66,4 @@ export class StudentPage extends React.Component {
         );
 
     }
-
-
 }

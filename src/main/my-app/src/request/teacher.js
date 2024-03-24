@@ -12,7 +12,3 @@ export function saveOrUpdateTeacher(teacher) {
 export function findTeacherBySurname(surname) {
     return ajax(URL_TEACHER_SURNAME, {queryData: {surname: surname}});
 }
-
-export function findTeacherById(id) {
-    return ajax(URL_TEACHER + "/" + id);
-}

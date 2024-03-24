@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import './css/ModalLessonRow.css';
-import {saveSalary, findSalaryByTeacherId} from "../../request/salary"
 import {Student} from "../../domain/Student";
-import {Salary} from "../../domain/Salary";
 
 export class ModalLessonRow extends React.PureComponent {
     static propTypes = {
@@ -43,7 +41,7 @@ export class ModalLessonRow extends React.PureComponent {
 
         return (
             <div className="modal-lesson-row">
-                <a href={"https://"+this.props.link} target="_blank" rel="noopener noreferrer">
+                <a href={"https://" + this.props.link} target="_blank" rel="noopener noreferrer">
                     <div>{formattedFromTime} - {formattedToTime}</div>
                 </a>
                 <div>{this.props.theme}</div>
@@ -62,12 +60,6 @@ export class ModalLessonRow extends React.PureComponent {
             status: action
         }
         this.props.operateLesson(DATA);
-
-        const DATA_FOR_SALARY = {
-            dateTime: new Date(),
-            teacherId: this.props.teacherId,
-            amount: 130
-        };
     }
 
     ifUserIsAdmin() {

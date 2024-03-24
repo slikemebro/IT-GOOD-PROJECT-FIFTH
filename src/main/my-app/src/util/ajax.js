@@ -1,6 +1,6 @@
 import superagent from 'superagent';
 
-import { RequestModel } from './RequestModel';
+import {RequestModel} from './RequestModel';
 
 const DEFAULT_OPTIONS = {
     method: 'get',
@@ -95,22 +95,17 @@ export function uriEncode(data) {
  * @returns {RequestModel} - returns promise like instance
  */
 export function ajax(url, options, formData = false, timeout = null) {
-    // const DEFAULT_OPTIONS = {
-    //     method: 'get',
-    //     data: {},
-    //     headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-    // };
     if (localStorage.getItem('token') === null) {
         DEFAULT_OPTIONS.headers = {};
-    }else {
+    } else {
         DEFAULT_OPTIONS.headers = {'Authorization': 'Bearer ' + localStorage.getItem('token')};
     }
 
-    const { queryData, data, ...optionsData } = options || {};
-    const OPTIONS = { ...DEFAULT_OPTIONS, ...optionsData, data };
+    const {queryData, data, ...optionsData} = options || {};
+    const OPTIONS = {...DEFAULT_OPTIONS, ...optionsData, data};
 
     const METHOD = OPTIONS.method.toLowerCase();
-    const HEADERS = { ...DEFAULT_HEADERS, ...OPTIONS.headers };
+    const HEADERS = {...DEFAULT_HEADERS, ...OPTIONS.headers};
     let reqUrl = url;
     let urlEncodedData = '';
 

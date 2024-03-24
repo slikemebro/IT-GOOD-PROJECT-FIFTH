@@ -6,9 +6,11 @@ export function findAllSalary() {
 }
 
 export function findSalaryByTeacherId(id) {
-    return ajax(URL_SALARY_TEACHER, {queryData: {
-        id: id
-        }})
+    return ajax(URL_SALARY_TEACHER, {
+        queryData: {
+            id: id
+        }
+    })
 }
 
 export function saveSalary(salary) {

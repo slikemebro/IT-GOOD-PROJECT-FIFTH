@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './HoverNavbar.css';
 
 const HoverNavbar = ({onActiveTab, logged, activeTabFromRoot, role}) => {
@@ -7,9 +7,9 @@ const HoverNavbar = ({onActiveTab, logged, activeTabFromRoot, role}) => {
     let tabs = [];
     if (logged && role === 'ADMIN') {
         tabs = ['Student', 'Teacher', 'Table', 'Payment', 'Salary', 'Switch to teacher', 'Auth'];
-    }else if (logged) {
+    } else if (logged) {
         tabs = ['Table', 'Auth'];
-    }else {
+    } else {
         tabs = ['Auth'];
     }
 
@@ -25,7 +25,7 @@ const HoverNavbar = ({onActiveTab, logged, activeTabFromRoot, role}) => {
         const activeTabElement = navbar.querySelector(`.${activeTabFromRoot}`);
         if (!activeTabElement) return;
 
-        const { left, width } = activeTabElement.getBoundingClientRect();
+        const {left, width} = activeTabElement.getBoundingClientRect();
         const navbarLeft = navbar.getBoundingClientRect().left;
 
         setRippleStyle({
@@ -37,7 +37,7 @@ const HoverNavbar = ({onActiveTab, logged, activeTabFromRoot, role}) => {
 
     return (
         <div className="navbar" ref={navbarRef}>
-            <div className="ripple" style={rippleStyle} />
+            <div className="ripple" style={rippleStyle}/>
             {tabs.map(tab => (
                 <div
                     key={tab}
