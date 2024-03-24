@@ -57,7 +57,7 @@ public class TeacherController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or @teacherServiceImpl.isCurrentUserIsTeacher(#id)")
+    @PreAuthorize("hasAuthority('ADMIN') or @teacherServiceImpl.isUserTeacher(#id)")
     public ResponseEntity<Teacher> findById(@PathVariable("id") Long id) {
         log.info("findById teacher");
         return new ResponseEntity<>(service.findById(id), OK);

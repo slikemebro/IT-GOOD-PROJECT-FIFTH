@@ -12,7 +12,8 @@ export class AddStudentForm extends React.PureComponent {
 
     static defaultProps = {
         student: null,
-        addRow: () => {}
+        addRow: () => {
+        }
     }
 
 
@@ -71,8 +72,8 @@ export class AddStudentForm extends React.PureComponent {
     }
 
     onSubmit(e) {
-        const { name, surname, age, contacts, active, id } = this.state;
-        const DATA = { name, surname, age, contacts, active, id };
+        const {name, surname, age, contacts, active, id} = this.state;
+        const DATA = {name, surname, age, contacts, active, id};
 
         this.props.addRow(new Student(DATA).requestObject);
     }
@@ -86,26 +87,32 @@ export class AddStudentForm extends React.PureComponent {
         return <div className="add-student-form">
             <div className="add-student-form-component">
                 <label>Name:</label>
-                <input value={this.state.name} onChange={(e) => this.handleNameInput(e)} className="add-student-form-input" />
+                <input value={this.state.name} onChange={(e) => this.handleNameInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Surname:</label>
-                <input value={this.state.surname} onChange={(e) => this.handleSurnameInput(e)} className="add-student-form-input"/>
+                <input value={this.state.surname} onChange={(e) => this.handleSurnameInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Age:</label>
-                <input value={this.state.age} onChange={(e) => this.handleAgeInput(e)} className="add-student-form-input"/>
+                <input value={this.state.age} onChange={(e) => this.handleAgeInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Contacts:</label>
-                <input value={this.state.contacts} onChange={(e) => this.handleContactsInput(e)} className="add-student-form-input"/>
+                <input value={this.state.contacts} onChange={(e) => this.handleContactsInput(e)}
+                       className="add-student-form-input"/>
             </div>
             <div className="add-student-form-component">
                 <label>Active:</label>
                 <input type="checkbox" onChange={(e) => this.handleCheckedBox(e)}/>
             </div>
             <div className="add-student-form-component">
-            <button disabled={!this.isDataValid()} onClick={(e) => this.onSubmit(e)} className="add-student-form-button">Submit</button>
+                <button disabled={!this.isDataValid()} onClick={(e) => this.onSubmit(e)}
+                        className="add-student-form-button">Submit
+                </button>
             </div>
         </div>
 

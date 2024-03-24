@@ -37,16 +37,15 @@ public class TeacherServiceImpl implements BaseEmployeeService<Teacher> {
 
     @Override
     public List<StudentDTO> findAllWithLessonsBalance() {
-        //todo not implemented
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     @Transactional
     public Teacher updateOrSave(Teacher teacher) {
-        boolean isExist = teacher.getId() != null;
+        boolean isTeacherExist = teacher.getId() != null;
         Teacher createdTeacher = repository.save(teacher);
-        if (isExist) {
+        if (isTeacherExist) {
             log.info("Teacher updated: " + teacher.getId());
             return createdTeacher;
         }
@@ -104,7 +103,7 @@ public class TeacherServiceImpl implements BaseEmployeeService<Teacher> {
         return repository.findBySurname(surname);
     }
 
-    public boolean isCurrentUserIsTeacher(Long teacherId) {
+    public boolean isUserTeacher(Long teacherId) {
         User user = AuthUtil.getCurrentUser();
         Teacher teacher = repository
                 .findById(teacherId)

@@ -29,7 +29,7 @@ public class SecurityConfig {
                 requests
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers(
-                                "api/v1/table/teacher",
+                                "/api/v1/table/teacher",
                                 "/api/v1/lesson/teacher",
                                 "/api/v1/student/id",
                                 "/api/v1/teacher/{id}",

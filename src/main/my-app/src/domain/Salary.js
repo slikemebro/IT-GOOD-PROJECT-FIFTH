@@ -1,5 +1,3 @@
-import data from "superagent/lib/request-base";
-
 export class Salary {
 
     _id = null;

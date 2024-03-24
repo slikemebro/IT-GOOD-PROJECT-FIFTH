@@ -1,7 +1,6 @@
 import React from 'react'
 import './AuthPage.css';
-import {authentication, registration, findUserByEmail, updateUserPassword} from "../request/auth";
-import {RegisterRequest} from "../domain/RegisterRequest";
+import {authentication, findUserByEmail, updateUserPassword} from "../request/auth";
 import {AuthenticationRequest} from "../domain/AuthenticationRequest";
 import PropTypes from "prop-types";
 
@@ -84,7 +83,7 @@ export class AuthPage extends React.Component {
     }
 
     logOut() {
-        this.state.firstLogin = false;
+        this.setState({firstLogin: false});
         localStorage.removeItem('token');
         this.props.onLogout();
         console.log("Logged out");
@@ -207,7 +206,7 @@ export class AuthPage extends React.Component {
         this.setState({isValidPassword: this.checkPassword()}, () => {
             console.log("is valid Password: " + this.state.isValidPassword);
             if (this.state.isValidPassword) {
-                updateUserPassword(this.state.confirmChangePassword, this.state.email).then((data) => {
+                updateUserPassword(this.state.confirmChangePassword, this.state.email).then(() => {
                     console.log("Password changed");
                     this.setState({firstLogin: false})
                 });

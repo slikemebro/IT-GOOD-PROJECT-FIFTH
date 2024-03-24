@@ -104,7 +104,7 @@ public class StudentServiceImpl implements BaseEmployeeService<Student> {
         return repository.findBySurname(surname);
     }
 
-    public boolean isCurrentUserIsTeacherOfStudent(Long studentId){
+    public boolean isUserTeacherOfStudent(Long studentId){
         User user = AuthUtil.getCurrentUser();
         List<Table> tableList = tableRepository.findByStudentId(studentId);
         log.info("Checking if user is owner of student: {}", studentId);

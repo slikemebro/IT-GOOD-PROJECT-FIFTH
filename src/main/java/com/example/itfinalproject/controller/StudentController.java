@@ -57,7 +57,7 @@ public class StudentController {
     }
 
     @GetMapping("/id")
-    @PreAuthorize("hasAuthority('ADMIN') or @studentServiceImpl.isCurrentUserIsTeacherOfStudent(#id)")
+    @PreAuthorize("hasAuthority('ADMIN') or @studentServiceImpl.isUserTeacherOfStudent(#id)")
     public ResponseEntity<Student> findById(@RequestParam Long id) {
         log.info("find student by id: {}", id);
         return new ResponseEntity<>(service.findById(id), OK);

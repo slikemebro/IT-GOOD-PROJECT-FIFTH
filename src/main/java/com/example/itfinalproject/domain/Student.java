@@ -8,10 +8,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "student")
 @Getter
 @Setter
 @Entity
+@Table(name = "student")
 public class Student {
 
     @Id

@@ -10,10 +10,10 @@ import lombok.Setter;
 
 import java.time.Instant;
 
-@Table(name = "teacher")
 @Getter
 @Setter
 @Entity
+@Table(name = "teacher")
 public class Teacher {
 
     @Id

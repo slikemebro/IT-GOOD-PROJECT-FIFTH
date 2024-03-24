@@ -1,5 +1,5 @@
 import React from 'react';
-import {findAllSalary, findSalaryByTeacherId, saveSalary} from "../request/salary";
+import {findAllSalary, saveSalary} from "../request/salary";
 import {Salary} from "../domain/Salary";
 import {AbstractUsersTable} from "../component/table/AbstractUsersTable";
 
@@ -23,12 +23,6 @@ export class SalaryPage extends React.Component {
         saveSalary(new Salary(data).requestObject).then(() => this.loadSalaryList());
     }
 
-    findByTeacherId(id) {
-        findSalaryByTeacherId(id).then((res) => {
-            this.setState({data: res.body.map((row) => new Salary(row))})
-        })
-    }
-
     getColumns() {
         return [{
             name: "Teacher ID",
@@ -50,13 +44,14 @@ export class SalaryPage extends React.Component {
                 name: "Date Time",
                 accessor: "dateTime"
             },
-            ]
+        ]
     }
 
     render() {
         return (
             <div>
-                <AbstractUsersTable manager={"salary"} addRow={(data) => this.saveSalary(data)} data={this.state.data} columns={this.getColumns()}/>
+                <AbstractUsersTable manager={"salary"} addRow={(data) => this.saveSalary(data)} data={this.state.data}
+                                    columns={this.getColumns()}/>
             </div>
         );
     }

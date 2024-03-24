@@ -89,8 +89,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String username = jwtUtils.extractUsername(token);
         User user = repository.findByEmail(username)
                 .orElseThrow(() -> new UserNotFoundException(USER_WAS_NOT_FOUND_MESSAGE));
-        boolean verified = jwtUtils.validateToken(token, user);
-        if (verified) {
+        boolean isValid = jwtUtils.validateToken(token, user);
+        if (isValid) {
             log.info("Token verified: {}", user.getEmail());
             return getAuthenticationResponse(token);
         } else {

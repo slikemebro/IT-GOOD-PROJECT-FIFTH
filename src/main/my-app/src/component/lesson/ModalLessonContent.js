@@ -25,7 +25,6 @@ function groupLessonsByDate(lessons) {
         lessonsByDate.get(startDate).push(lesson);
     });
 
-    // lessons.sort((b, a) => new Date(a.startDateTime) - new Date(b.startDateTime));
     return lessonsByDate;
 }
 
@@ -150,7 +149,6 @@ export class ModalLessonContent extends React.PureComponent {
     }
 
     getEarnedMoney() {
-        // 2 - completed
         let earnedMoney = 0;
         findSalaryByTeacherId(this.props.teacherId).then((res) => {
             res.body.map((s) => new Salary(s));

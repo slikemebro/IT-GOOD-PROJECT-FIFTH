@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import "./AbstractModalWindow.css";
 
@@ -6,7 +6,7 @@ class AbstractModalWindow extends Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         children: PropTypes.node,
-        onClose: PropTypes.func.isRequired 
+        onClose: PropTypes.func.isRequired
     };
 
     handleCloseClick = () => {
@@ -14,7 +14,7 @@ class AbstractModalWindow extends Component {
     };
 
     render() {
-        const { title, children } = this.props;
+        const {title, children} = this.props;
 
         return (
             <div className="abstract-modal-window">

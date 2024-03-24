@@ -1,4 +1,3 @@
-
 export class Table {
 
     _id = null;

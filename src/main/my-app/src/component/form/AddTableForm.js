@@ -1,11 +1,11 @@
 import React from 'react';
 import './AddStudentForm.css';
-import { findStudentBySurname } from "../../request/student";
-import { findTeacherBySurname } from "../../request/teacher";
-import { Teacher } from "../../domain/Teacher";
-import { Student } from "../../domain/Student";
+import {findStudentBySurname} from "../../request/student";
+import {findTeacherBySurname} from "../../request/teacher";
+import {Teacher} from "../../domain/Teacher";
+import {Student} from "../../domain/Student";
 import PropTypes from "prop-types";
-import { Table } from "../../domain/Table";
+import {Table} from "../../domain/Table";
 
 export class AddTableForm extends React.PureComponent {
     static propTypes = {
@@ -13,7 +13,8 @@ export class AddTableForm extends React.PureComponent {
     }
 
     static defaultProps = {
-        onSubmit: () => {}
+        onSubmit: () => {
+        }
     }
 
     state = {
@@ -29,7 +30,7 @@ export class AddTableForm extends React.PureComponent {
             findTeacherBySurname(value).then((response) => {
                 if (response.body) {
                     const TEACHERS = response.body.map((teacher) => new Teacher(teacher));
-                    this.setState({ teachers: TEACHERS });
+                    this.setState({teachers: TEACHERS});
                 }
             });
         }
@@ -40,14 +41,14 @@ export class AddTableForm extends React.PureComponent {
             findStudentBySurname(value).then((response) => {
                 if (response.body) {
                     const STUDENTS = response.body.map((student) => new Student(student));
-                    this.setState({ students: STUDENTS });
+                    this.setState({students: STUDENTS});
                 }
             });
         }
     }
 
     onSubmit = () => {
-        const { selectedTeacher, selectedStudent, active } = this.state;
+        const {selectedTeacher, selectedStudent, active} = this.state;
         if (selectedTeacher && selectedStudent) {
             const DATA = {
                 teacherId: selectedTeacher.id,
@@ -64,7 +65,7 @@ export class AddTableForm extends React.PureComponent {
     }
 
     handleTeacherSelect = (teacher) => {
-        this.setState({ selectedTeacher: teacher });
+        this.setState({selectedTeacher: teacher});
     }
 
     handleStudentInputChange = (event) => {
@@ -72,7 +73,7 @@ export class AddTableForm extends React.PureComponent {
     }
 
     handleStudentSelect = (student) => {
-        this.setState({ selectedStudent: student });
+        this.setState({selectedStudent: student});
     }
 
     render() {
@@ -130,7 +131,7 @@ export class AddTableForm extends React.PureComponent {
                     <input
                         type="checkbox"
                         checked={this.state.active}
-                        onChange={(e) => this.setState({ active: e.target.checked })}
+                        onChange={(e) => this.setState({active: e.target.checked})}
                         className="form-checkbox"
                     />
                 </div>
@@ -148,7 +149,4 @@ export class AddTableForm extends React.PureComponent {
         );
     }
 
-    selectTeacher(e) {
-        this.setState({selectedTeacher: this.state.teachers.find(teacher => teacher.surname == e.target.value)});
-    }
 }

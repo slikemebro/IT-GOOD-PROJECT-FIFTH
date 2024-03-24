@@ -38,7 +38,7 @@ public class LessonController {
     }
 
     @GetMapping("/teacher")
-    @PreAuthorize("hasAuthority('ADMIN') or @lessonServiceImpl.isCurrentUserIsOwnerOfLesson(#teacherId)")
+    @PreAuthorize("hasAuthority('ADMIN') or @lessonServiceImpl.isUserOwnerOfLesson(#teacherId)")
     public ResponseEntity<List<Lesson>> findByTeacherId(@RequestParam Long teacherId) {
         log.info("findByTeacherId lessons: {}", teacherId);
         return new ResponseEntity<>(service.findByTeacherId(teacherId), OK);

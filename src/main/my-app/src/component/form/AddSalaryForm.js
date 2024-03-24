@@ -21,7 +21,6 @@ export class AddSalaryForm extends React.PureComponent {
         teachers: [],
     }
 
-
     render() {
         return (
             <div className="add-student-form">

@@ -97,8 +97,7 @@ public class TableServiceImpl implements TableService {
         log.info("Updated table: {}", tableUpsert);
         return repository.save(tableUpsert);
     }
-
-    public boolean isCurrentUserIsOwnerOfTable(Long teacherID) {
+    public boolean isUserOwnerOfTable(Long teacherID) {
         User user = AuthUtil.getCurrentUser();
         List<Table> tableList = repository.findByTeacherId(teacherID);
         log.info("Checking if user is owner of table");

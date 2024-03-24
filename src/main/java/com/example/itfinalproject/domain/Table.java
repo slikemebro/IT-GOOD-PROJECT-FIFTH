@@ -13,10 +13,10 @@ import lombok.Setter;
 
 import java.util.List;
 
-@jakarta.persistence.Table(name = "table_teacher_student")
 @Getter
 @Setter
 @Entity
+@jakarta.persistence.Table(name = "table_teacher_student")
 public class Table {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

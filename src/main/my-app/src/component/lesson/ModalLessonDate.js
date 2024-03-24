@@ -4,12 +4,12 @@ import './css/ModalLessonDate.css';
 
 export class ModalLessonDate extends React.PureComponent {
     static propTypes = {
-       date: PropTypes.any,
+        date: PropTypes.any,
         completedLessonsCount: PropTypes.number
     }
 
     formatDate(date) {
-        return new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }).replace('.', '');
+        return new Date(date).toLocaleDateString('ru-RU', {day: 'numeric', month: 'short'}).replace('.', '');
     }
 
     render() {

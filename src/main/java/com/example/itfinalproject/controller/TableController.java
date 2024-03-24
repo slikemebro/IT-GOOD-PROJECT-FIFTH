@@ -45,7 +45,7 @@ public class TableController {
     }
 
     @GetMapping("/teacher")
-    @PreAuthorize("hasAuthority('ADMIN') or @tableServiceImpl.isCurrentUserIsOwnerOfTable(#teacherId)")
+    @PreAuthorize("hasAuthority('ADMIN') or @tableServiceImpl.isUserOwnerOfTable(#teacherId)")
     public ResponseEntity<List<Table>> findByTeacherId(@RequestParam Long teacherId) {
         log.info("find table by teacher id: {}", teacherId);
         return new ResponseEntity<>(tableService.findByTeacherId(teacherId), OK);

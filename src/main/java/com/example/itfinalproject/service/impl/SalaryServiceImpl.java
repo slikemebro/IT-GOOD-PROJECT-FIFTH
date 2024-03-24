@@ -79,7 +79,7 @@ public class SalaryServiceImpl implements SalaryService {
         return salaryDto;
     }
 
-    public boolean isCurrentUserIsOwnerOfSalary(Long teacherID) {
+    public boolean isUserOwnerOfSalary(Long teacherID) {
         User user = AuthUtil.getCurrentUser();
         log.info("Checking if user is owner of salary: {}", teacherID);
         return user.getTeacherId().equals(teacherID);

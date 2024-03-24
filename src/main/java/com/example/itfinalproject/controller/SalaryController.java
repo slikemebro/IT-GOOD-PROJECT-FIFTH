@@ -32,7 +32,7 @@ public class SalaryController {
     }
 
     @GetMapping("/teacher")
-    @PreAuthorize("hasAuthority('ADMIN') or @salaryServiceImpl.isCurrentUserIsOwnerOfSalary(#id)")
+    @PreAuthorize("hasAuthority('ADMIN') or @salaryServiceImpl.isUserOwnerOfSalary(#id)")
     public ResponseEntity<List<SalaryDto>> findByTeacher(@RequestParam Long id) {
         log.info("find salary by teacher id: {}", id);
         return new ResponseEntity<>(service.findByTeacherId(id), OK);
